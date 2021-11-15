@@ -1,5 +1,11 @@
 import React, { ReactElement } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Routes from "./components/Routes";
 
 export default (): ReactElement => {
-  return <h1>Hi there</h1>;
+  return (
+    <Router>
+      <Routes />
+    </Router>
+  );
 };
