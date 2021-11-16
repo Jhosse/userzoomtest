@@ -3,6 +3,8 @@ import React, {
   useEffect,
   ReactElement
 } from "react";
+import { useAppSelector } from "../../store/hooks";
+import { searchResults } from "../../store/searchResultsSlice";
 import PageContainer from "../../containers/PageContainer";
 import BodyPageContainer from "../../containers/BodyPageContainer";
 import Search from "../../components/Search";
@@ -10,11 +12,18 @@ import SearchResults, { SearchResultsViewState } from "../../components/SearchRe
 import { GetNewsResult } from "../../services/api/types";
 
 export default (): ReactElement => {
+  const resultsFromStore = useAppSelector(searchResults);
+
   const [searchResponse, setSearchResponse] = useState<GetNewsResult[]>(undefined);
   const [searchResultsViewState, setSearchResultsViewState] = useState<SearchResultsViewState>(SearchResultsViewState.Empty);
   const [loading, setIsLoading] = useState<boolean>(false);
 
   const updateSearchResultsViewState = () => {
+    if (resultsFromStore.length) {
+      setSearchResponse(resultsFromStore);
+      return setSearchResultsViewState(SearchResultsViewState.Results);
+    }
+
     if (searchResponse === undefined) {
       return setSearchResultsViewState(SearchResultsViewState.Empty);
     }
@@ -28,7 +37,7 @@ export default (): ReactElement => {
 
   useEffect(() => {
     updateSearchResultsViewState();
-  }, [searchResponse]);
+  }, [searchResponse, resultsFromStore]);
 
   return (
     <PageContainer>

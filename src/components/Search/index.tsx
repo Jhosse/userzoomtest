@@ -9,6 +9,8 @@ import React, {
 import Button from "../Button";
 import { getNews } from "../../services/api";
 import { GetNews, GetNewsResult } from "../../services/api/types";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setSearchResults, setSearchKey, searchResultsReset, searchKey } from "../../store/searchResultsSlice";
 
 import "./styles.css";
 
@@ -23,10 +25,14 @@ export default ({
   setIsLoading,
   setSearchResponse,
 }: SearchProps): ReactElement => {
+  const dispatch = useAppDispatch();
+  const searchKeyFromStore = useAppSelector(searchKey);
+
   const [searchValue, setSearchValue] = useState<string>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(searchResultsReset());
     setIsLoading(true);
     const payload: GetNews = {
       searchKey: searchValue
@@ -38,10 +44,19 @@ export default ({
   
       setSearchResponse(results);
       setIsLoading(false);
+      /**
+       * - I wouldn't use Redux to store the results in a real application.
+       * - However, as we dont have BE to cache it and I will not implement 
+       * - pagination (Im only pulling 10 results from the API), redux sounds
+       * - better than only storing the search key and calling again the service.
+       */
+      dispatch(setSearchResults(results));
+      dispatch(setSearchKey(searchValue));
     } catch (error: unknown) {
       if (error instanceof Error) {
         // TODO: Handle error
         console.error(error.message);
+        dispatch(searchResultsReset());
       }
       setIsLoading(false);
     }
@@ -65,7 +80,7 @@ export default ({
           className="search-field display-block"
           type="input"
           name="Search"
-          placeholder="Search..."
+          placeholder={!!searchKeyFromStore ? searchKeyFromStore : "Search..."}
           onChange={handleInputChange}
         />
         <Button

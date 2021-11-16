@@ -1,6 +1,5 @@
 .body-page-container {
   background-color: var(--white);
-  /* min-height: 72vh; */
   margin: 16px;
 }
 
@@ -8,7 +7,6 @@
   .body-page-container {
     width: 100%;
     max-width: 767px;
-    /* min-height: 79vh; */
     margin: 16px auto;
   }
 }
