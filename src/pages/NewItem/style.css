@@ -1,0 +1,29 @@
+.header-image {
+  display: block;
+  max-width: 100%;
+}
+
+.header-image-caption {
+  font-size: 10px;
+  margin: 4px 16px;
+}
+
+.section-body {
+  margin: 16px;
+  padding-bottom: 32px;
+}
+
+.new-title {
+  font-size: 22px;
+  font-family: "Montserrat-SemiBold";
+}
+
+.new-content {
+  padding: 0 0 16px;
+}
+
+.new-link {
+  color: var(--blue);
+  font-size: 14px;
+  padding: 16px 0;
+}

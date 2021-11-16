@@ -54,7 +54,7 @@ export default ({
   };
 
   return (
-    <section className="search-component block">
+    <section className="search-component">
       <h1 className="montserrat-bold m-zero">Search</h1>
       <form className="" onSubmit={handleSubmit}>
         <label className="search-label display-block" htmlFor={INPUT_ID}>
