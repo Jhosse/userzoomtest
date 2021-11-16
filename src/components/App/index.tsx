@@ -1,6 +1,8 @@
 import React, { ReactElement } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Routes from "./components/Routes";
+import Routes from "../Routes";
+
+import "./styles.css";
 
 export default (): ReactElement => {
   return (

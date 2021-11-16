@@ -8,10 +8,6 @@
   src: url("../../fonts/Montserrat/Montserrat-SemiBold.ttf")  format("truetype");
 }
 
-body {
-  font-family: "Montserrat";
-}
-
 .montserrat {
   font-family: "Montserrat";
 }
