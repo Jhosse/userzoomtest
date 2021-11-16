@@ -1,0 +1,14 @@
+.body-page-container {
+  background-color: var(--white);
+  min-height: 72vh;
+  margin: 16px;
+}
+
+@media (min-width: 768px) {
+  .body-page-container {
+    width: 100%;
+    max-width: 767px;
+    min-height: 80vh;
+    margin: 16px auto;
+  }
+}

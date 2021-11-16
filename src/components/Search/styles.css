@@ -1,0 +1,30 @@
+.search-component {
+  border-bottom: 1px solid var(--light-grey);
+  padding-bottom: 16px;
+}
+
+.search-label {
+  margin: 8px 0;
+}
+
+.search-field {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  color: var(--grey);
+  border: 1px solid var(--grey);
+  border-radius: 5px;
+  transition: all .2s;
+  margin-bottom: 16px;
+}
+
+.search-field:hover,
+.search-field:active,
+.search-field:focus {
+  border: 1px solid var(--blue);
+  outline: none;
+}
+
+.search-field::placeholder {
+  color: var(--light-grey);
+}

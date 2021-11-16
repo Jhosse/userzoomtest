@@ -4,15 +4,13 @@
   color: var(--light-grey);
   background-color: var(--grey);
   padding: 20px 0;
-  font-size: .8em;
-  position: absolute;
-  bottom: 0;
+  font-size: 14px;
+  /* position: absolute;
+  bottom: 0; */
 }
 
 .footer-content {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
+  margin: 0 16px;
 }
 
 .footer-link {
@@ -22,4 +20,12 @@
 
 .footer-link:hover {
   color: var(--white);
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    width: 100%;
+    max-width: 767px;
+    margin: 0 auto;
+  }
 }
