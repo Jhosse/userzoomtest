@@ -2,19 +2,51 @@ import React, {
   useState,
   ReactElement,
   FormEvent,
-  ChangeEventHandler
+  ChangeEventHandler,
+  Dispatch,
+  SetStateAction
 } from "react";
 import Button from "../Button";
+import { getNews } from "../../services/api";
+import { GetNews, GetNewsResult } from "../../services/api/types";
 
 import "./styles.css";
 
 const INPUT_ID = "search-input"
 
-export default (): ReactElement => {
+interface SearchProps {
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setSearchResponse: Dispatch<SetStateAction<GetNewsResult[]>>;
+}
+
+export default ({
+  setIsLoading,
+  setSearchResponse,
+}: SearchProps): ReactElement => {
   const [searchValue, setSearchValue] = useState<string>();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    const payload: GetNews = {
+      searchKey: searchValue
+    };
+
+    try {
+      const data = await getNews(payload);
+      const results = data.response.results;
+  
+      if (results.length) {
+        setSearchResponse(results);
+      }
+      setIsLoading(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        // TODO: Handle error
+        console.error(error.message);
+      }
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange: ChangeEventHandler<
