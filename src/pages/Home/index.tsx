@@ -8,15 +8,17 @@ import { searchResults } from "../../store/searchResultsSlice";
 import PageContainer from "../../containers/PageContainer";
 import BodyPageContainer from "../../containers/BodyPageContainer";
 import Search from "../../components/Search";
+import Spinner from "../../components/Spinner";
 import SearchResults, { SearchResultsViewState } from "../../components/SearchResults";
 import { GetNewsResult } from "../../services/api/types";
+
 
 export default (): ReactElement => {
   const resultsFromStore = useAppSelector(searchResults);
 
   const [searchResponse, setSearchResponse] = useState<GetNewsResult[]>(undefined);
   const [searchResultsViewState, setSearchResultsViewState] = useState<SearchResultsViewState>(SearchResultsViewState.Empty);
-  const [loading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const updateSearchResultsViewState = () => {
     if (resultsFromStore.length) {
@@ -46,8 +48,8 @@ export default (): ReactElement => {
           setIsLoading={setIsLoading}
           setSearchResponse={setSearchResponse}
         />
-        {loading ? (
-          <h1>LOADING</h1>
+        {isLoading ? (
+          <Spinner />
         ) : (
           <SearchResults
             viewState={searchResultsViewState}

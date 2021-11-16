@@ -1,6 +1,13 @@
+/**
+  * - I don't like to style html tags but in this case,
+  * - there are images coming in the bodyHtml
+  * - content of some of the news/articles. 
+  */
+img,
 .header-image {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 .header-image-caption {

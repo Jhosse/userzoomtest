@@ -8,6 +8,7 @@ import { getNew } from "../../services/api";
 import { GetNew, GetNewResponse, GetNewResult, Asset } from "../../services/api/types";
 import PageContainer from "../../containers/PageContainer";
 import BodyPageContainer from "../../containers/BodyPageContainer";
+import Spinner from "../../components/Spinner";
 
 import "./style.css";
 
@@ -20,15 +21,17 @@ export default (): ReactElement => {
   /**
    * - In a real project all of these get data functions 
    * - should required a better understanding of the API.
-   * - Making sure it won't fail or adding a fallback to it.
+   * - Making sure it won't fail and adding a proper fallback to it.
    */
 
   const getImage = (): string => {
     const imageUrl = singleNew.blocks.main.elements[0].assets.find((item: Asset) => {
       return item.typeData.aspectRatio === "5:3" && item.typeData.width > 700
-    }).file;
+    });
 
-    return imageUrl;
+    if (imageUrl) return imageUrl.file;
+
+    return "https://via.placeholder.com/1000x600";
   };
 
   const getImageData = (): {
@@ -36,8 +39,21 @@ export default (): ReactElement => {
     credit: string,
     alt: string
   } => {
-    const { caption, credit, alt } = singleNew.blocks.main.elements[0].imageTypeData;
-    return { caption, credit, alt };
+    const imageData = singleNew.blocks.main.elements[0].imageTypeData;
+
+    if (imageData) {
+      return { 
+        caption: imageData.caption,
+        credit: imageData.credit,
+        alt: imageData.alt,
+      };
+    }
+
+    return { 
+      caption: "caption",
+      credit: "credit",
+      alt: "new image header",
+    };
   };
 
   const getContent = (): string => singleNew.blocks.body[0].bodyHtml;
@@ -59,7 +75,7 @@ export default (): ReactElement => {
     <PageContainer>
       <BodyPageContainer>
         {isLoading ? (
-          <h1>LOADING</h1>
+          <Spinner />
         ) : (
           <section>
             <figure className="m-zero">
