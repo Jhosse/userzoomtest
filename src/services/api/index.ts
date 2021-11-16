@@ -17,7 +17,8 @@ const getNews = async ({
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }
-    return data;
+
+    return data.response;
   })
   .catch((error: unknown) => {
     if (error instanceof Error) {

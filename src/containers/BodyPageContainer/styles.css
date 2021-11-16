@@ -8,7 +8,7 @@
   .body-page-container {
     width: 100%;
     max-width: 767px;
-    min-height: 80vh;
+    min-height: 79vh;
     margin: 16px auto;
   }
 }

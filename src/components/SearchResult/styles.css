@@ -1,0 +1,39 @@
+.new-container {
+  border: 1px solid var(--light-grey);
+  color: var(--grey);
+  border-radius: 2px;
+  margin: 16px 0;
+  padding: 8px;
+  display: block;
+  text-decoration: none;
+  transition: all .2s;
+}
+
+.new-container:hover {
+  border-color: var(--grey);
+}
+
+.new-title,
+.new-tag,
+.new-date {
+  margin: 0;
+  padding: 0;
+}
+
+.new-title,
+.new-date {
+  margin-top: 8px;
+}
+
+.new-title {
+  font-size: 16px;
+}
+
+.new-date {
+  font-size: 12px;
+}
+
+.new-tag {
+  font-family: "Montserrat-SemiBold";
+  color: var(--blue);
+}

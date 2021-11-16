@@ -17,7 +17,7 @@ export interface GetNewsResult {
   pillarName: string;
 }
 
-export interface Response {
+export interface GetNewsResponse {
   status: string;
   userTier: string;
   total: number;
@@ -29,6 +29,6 @@ export interface Response {
   results: GetNewsResult[];
 }
 
-export interface GetNewsResponse {
-  response: Response;
-}
+// export interface GetNewsResponse {
+//   response: Response;
+// }

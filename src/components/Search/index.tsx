@@ -34,11 +34,9 @@ export default ({
 
     try {
       const data = await getNews(payload);
-      const results = data.response.results;
+      const results = data.results;
   
-      if (results.length) {
-        setSearchResponse(results);
-      }
+      setSearchResponse(results);
       setIsLoading(false);
     } catch (error: unknown) {
       if (error instanceof Error) {
