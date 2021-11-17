@@ -4,13 +4,14 @@ import React, {
   FormEvent,
   ChangeEventHandler,
   Dispatch,
-  SetStateAction
+  SetStateAction,
 } from "react";
 import Button from "../Button";
 import { getNews } from "../../services/api";
 import { GetNews, GetNewsResult } from "../../services/api/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setSearchResults, setSearchKey, searchResultsReset, searchKey } from "../../store/searchResultsSlice";
+import SortNews, { SortValue } from "../SortNews";
 
 import "./styles.css";
 
@@ -29,13 +30,15 @@ export default ({
   const searchKeyFromStore = useAppSelector(searchKey);
 
   const [searchValue, setSearchValue] = useState<string>();
+  const [sortValue, setSortValue] = useState<SortValue>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(searchResultsReset());
     setIsLoading(true);
     const payload: GetNews = {
-      searchKey: searchValue
+      searchKey: searchValue,
+      orderBy: sortValue,
     };
 
     try {
@@ -72,22 +75,28 @@ export default ({
     <section className="search-component">
       <h1 className="montserrat-bold m-zero">Search</h1>
       <form className="" onSubmit={handleSubmit}>
-        <label className="search-label display-block" htmlFor={INPUT_ID}>
-          Add a description.
-        </label>
-        <input
-          id={INPUT_ID}
-          className="search-field display-block"
-          type="input"
-          name="Search"
-          placeholder={!!searchKeyFromStore ? searchKeyFromStore : "Search..."}
-          onChange={handleInputChange}
-        />
+        <div>
+          <label className="search-label display-block" htmlFor={INPUT_ID}>
+            Add a description.
+          </label>
+          <input
+            id={INPUT_ID}
+            className="search-field display-block"
+            type="input"
+            name="Search"
+            placeholder={!!searchKeyFromStore ? searchKeyFromStore : "Search..."}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <SortNews setOrderBy={setSortValue}/>
+
         <Button
           className={"search-button"}
           content={"Search"}
           type="submit"
           action={() => {}}
+          isDisabled={!searchValue}
         />
       </form>
     </section>

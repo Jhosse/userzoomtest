@@ -4,7 +4,7 @@
   align-items: center;
   padding: 8px 24px;
   border-radius: 5px;
-  transition: .1s;
+  transition: all .1s;
 }
 
 .button.primary {
@@ -22,3 +22,13 @@
 .button:hover {
   cursor: pointer;
 }
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.button.primary:disabled {
+  background-color: var(--light-grey);
+  border-color: var(--light-grey);
+}
+

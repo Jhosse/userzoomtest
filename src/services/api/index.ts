@@ -14,7 +14,9 @@ const getNews = async ({
   orderBy = "newest",
 }: GetNews ): Promise<GetNewsResponse> => {
 
-  return await fetch(`${URL}search?q=${searchKey}&api-key=${API_KEY}&order-by=${orderBy}`)
+  const formatterOrderBy = orderBy.toLocaleLowerCase().trim();
+
+  return await fetch(`${URL}search?q=${searchKey}&api-key=${API_KEY}&order-by=${formatterOrderBy}`)
   .then(async (response: Response) => {
     const data = await response.json();
 
