@@ -10,6 +10,7 @@ import { getNews } from "../../services/api";
 import { GetNews, GetNewsResult } from "../../services/api/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setSearchResults, setSearchKey, searchResultsReset, searchKey } from "../../store/searchResultsSlice";
+import { setErrorAlert } from "../../store/errorAlertSlice";
 import { setPreviousSearches } from "../../store/previousSearchesSlice";
 import SortNews, { SortValue } from "../SortNews";
 import DateFilter, { DateFilterType } from "../DateFilter";
@@ -63,11 +64,11 @@ export default ({
        */
       dispatch(setSearchResults(results));
       dispatch(setSearchKey(searchValue));
-      dispatch(setPreviousSearches(payload))
+      dispatch(setPreviousSearches(payload));
     } catch (error: unknown) {
       if (error instanceof Error) {
-        // TODO: Handle error
-        console.error(error.message);
+        console.error(error);
+        dispatch(setErrorAlert(error.message));
         dispatch(searchResultsReset());
       }
       setIsLoading(false);

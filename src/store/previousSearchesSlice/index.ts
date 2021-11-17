@@ -3,7 +3,7 @@ import type { RootState } from "..";
 import { GetNews } from "../../services/api/types";
 
 export interface PreviousSearchesState {
-  previousSearches: GetNews[]
+  previousSearches: GetNews[];
 }
 
 export const initialState: PreviousSearchesState = {

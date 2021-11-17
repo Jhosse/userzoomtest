@@ -4,6 +4,8 @@ import React, {
   ReactElement
 } from "react";
 import { useHistory } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { setErrorAlert } from "../../store/errorAlertSlice";
 import { getNew } from "../../services/api";
 import { GetNew, GetNewResponse, GetNewResult, Asset } from "../../services/api/types";
 import PageContainer from "../../containers/PageContainer";
@@ -16,6 +18,7 @@ import "./style.css";
 export default (): ReactElement => {
   const history = useHistory();
   const { search: pathnameSearch } = history.location;
+  const dispatch = useAppDispatch();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [singleNew, setSingleNew] = useState<GetNewResult>(undefined);
@@ -36,6 +39,7 @@ export default (): ReactElement => {
   
       return "https://via.placeholder.com/1000x600";
     } catch (error) {
+      dispatch(setErrorAlert("Image URL missing"));
       return "https://via.placeholder.com/1000x600";
     }
   };
@@ -62,6 +66,7 @@ export default (): ReactElement => {
         alt: "new image header",
       };
     } catch (error) {
+      dispatch(setErrorAlert("Image credits missing"));
       return { 
         caption: "caption",
         credit: "credit",

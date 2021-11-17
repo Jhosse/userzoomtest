@@ -9,3 +9,15 @@
   align-items: center;
   min-height: 150px;
 }
+
+.view-container-no-results h1 {
+  font-size: 16px;
+  text-align: center;
+}
+
+
+@media (min-width: 768px) {
+  .view-container-no-results {
+    min-height: 250px;
+  }
+}

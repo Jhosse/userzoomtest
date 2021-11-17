@@ -39,8 +39,8 @@ const getNews = async ({
   })
   .catch((error: unknown) => {
     if (error instanceof Error) {
-      // TODO: Throw error for the view
-      console.error(error.message);
+      console.error(error);
+      throw new Error(error.message);
     }
   });
 };
@@ -62,8 +62,8 @@ const getNew = async ({
   })
   .catch((error: unknown) => {
     if (error instanceof Error) {
-      // TODO: Throw error for the view
-      console.error(error.message);
+      console.error(error);
+      throw new Error(error.message);
     }
   });
 };
