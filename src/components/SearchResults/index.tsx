@@ -5,6 +5,7 @@ import React, {
  } from "react";
 import { GetNewsResult } from "../../services/api/types";
 import SearchResult from "../SearchResult";
+import PreviousSearchTags from "../PreviousSearchTags";
 
 import "./styles.css";
 
@@ -39,21 +40,27 @@ export default ({
   switch(viewState) {
     case SearchResultsViewState.NoResults:
       return (
-        <SearchResultsViewContainer
-          className={"view-container-no-results"}
-        >
-          <h1>Please try one more time, seems there are no news for that topic.</h1>
-        </SearchResultsViewContainer>
+        <>
+          <SearchResultsViewContainer
+            className={"view-container-no-results"}
+          >
+            <h1>Please try one more time, seems there are no news for that topic.</h1>
+          </SearchResultsViewContainer>
+          <PreviousSearchTags />
+        </>
       );
     case SearchResultsViewState.Results:
       return (
-        <SearchResultsViewContainer>
-          {results.map((result) => {
-            return (
-              <SearchResult key={result.id} item={result} />
-            );
-          })}
-        </SearchResultsViewContainer>
+        <>
+          <SearchResultsViewContainer>
+            {results.map((result) => {
+              return (
+                <SearchResult key={result.id} item={result} />
+              );
+            })}
+          </SearchResultsViewContainer>
+          <PreviousSearchTags />
+        </>
       );
     default:
       return (

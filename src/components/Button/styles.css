@@ -1,7 +1,6 @@
 .button {
   text-transform: uppercase;
   text-align: center;
-  align-items: center;
   padding: 8px 24px;
   border-radius: 5px;
   transition: all .1s;

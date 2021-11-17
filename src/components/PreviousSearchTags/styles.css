@@ -1,0 +1,26 @@
+.recent-search-container {
+  border-top: 1px solid var(--light-grey);
+  padding-bottom: 32px;
+  margin: 16px;
+}
+
+.recent-search-title {
+  font-family: "Montserrat-SemiBold";
+  font-size: 16px;
+}
+
+.previous-search-button {
+  font-size: 10px;
+  padding: 2px 4px;
+  margin: 0 8px 8px 0;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid var(--grey);
+  background-color: var(--white);
+  color: var(--grey);
+  display: inline-block;
+}
+
+.previous-search-button:hover {
+  cursor: pointer;
+}

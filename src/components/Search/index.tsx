@@ -10,6 +10,7 @@ import { getNews } from "../../services/api";
 import { GetNews, GetNewsResult } from "../../services/api/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setSearchResults, setSearchKey, searchResultsReset, searchKey } from "../../store/searchResultsSlice";
+import { setPreviousSearches } from "../../store/previousSearchesSlice";
 import SortNews, { SortValue } from "../SortNews";
 import DateFilter, { DateFilterType } from "../DateFilter";
 import SearchField from "../SearchField";
@@ -39,8 +40,8 @@ export default ({
     setIsLoading(true);
     const payload: GetNews = {
       searchKey: searchValue,
-      orderBy: sortValue,
     };
+    if(sortValue) payload.orderBy = sortValue;
 
     /**
      * - Proper date validation should be put in place.
@@ -62,6 +63,7 @@ export default ({
        */
       dispatch(setSearchResults(results));
       dispatch(setSearchKey(searchValue));
+      dispatch(setPreviousSearches(payload))
     } catch (error: unknown) {
       if (error instanceof Error) {
         // TODO: Handle error
