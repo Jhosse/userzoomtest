@@ -2,6 +2,8 @@
 export interface GetNews {
   searchKey: string;
   orderBy?: string;
+  dateFrom?: string;
+  dateTo?: string;
 }
 
 export interface GetNewsResult {

@@ -1,0 +1,25 @@
+/**
+  * - This code is duplicated. Best approach is to create a
+  * - generic input component to share across the application.
+ */
+.date-input-field {
+  width: 100%;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  color: var(--grey);
+  border: 1px solid var(--grey);
+  border-radius: 5px;
+  transition: all .2s;
+  margin: 8px 0 16px;
+}
+
+.date-input-field:hover,
+.date-input-field:active,
+.date-input-field:focus {
+  border: 1px solid var(--blue);
+  outline: none;
+}
+
+.date-input-field::placeholder {
+  color: var(--light-grey);
+}

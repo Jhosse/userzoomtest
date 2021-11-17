@@ -2,7 +2,6 @@ import React, {
   useState,
   ReactElement,
   FormEvent,
-  ChangeEventHandler,
   Dispatch,
   SetStateAction,
 } from "react";
@@ -12,10 +11,10 @@ import { GetNews, GetNewsResult } from "../../services/api/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setSearchResults, setSearchKey, searchResultsReset, searchKey } from "../../store/searchResultsSlice";
 import SortNews, { SortValue } from "../SortNews";
+import DateFilter, { DateFilterType } from "../DateFilter";
+import SearchField from "../SearchField";
 
 import "./styles.css";
-
-const INPUT_ID = "search-input"
 
 interface SearchProps {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
@@ -28,9 +27,11 @@ export default ({
 }: SearchProps): ReactElement => {
   const dispatch = useAppDispatch();
   const searchKeyFromStore = useAppSelector(searchKey);
-
-  const [searchValue, setSearchValue] = useState<string>();
+  
+  const [searchValue, setSearchValue] = useState<string>(searchKeyFromStore);
   const [sortValue, setSortValue] = useState<SortValue>();
+  const [dateFrom, setDateFrom] = useState<string>();
+  const [dateTo, setDateTo] = useState<string>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,6 +41,12 @@ export default ({
       searchKey: searchValue,
       orderBy: sortValue,
     };
+
+    /**
+     * - Proper date validation should be put in place.
+     */
+    if (dateFrom) payload.dateFrom = dateFrom;
+    if (dateTo) payload.dateTo = dateTo;
 
     try {
       const data = await getNews(payload);
@@ -65,31 +72,18 @@ export default ({
     }
   };
 
-  const handleInputChange: ChangeEventHandler<
-    HTMLTextAreaElement | HTMLInputElement
-  > = ({ target }) => {
-    setSearchValue(target.value);
-  };
-
   return (
     <section className="search-component">
       <h1 className="montserrat-bold m-zero">Search</h1>
       <form className="" onSubmit={handleSubmit}>
-        <div>
-          <label className="search-label display-block" htmlFor={INPUT_ID}>
-            Add a description.
-          </label>
-          <input
-            id={INPUT_ID}
-            className="search-field display-block"
-            type="input"
-            name="Search"
-            placeholder={!!searchKeyFromStore ? searchKeyFromStore : "Search..."}
-            onChange={handleInputChange}
-          />
-        </div>
+        <SearchField setSearchValue={setSearchValue} />
 
-        <SortNews setOrderBy={setSortValue}/>
+        <div className="filter-data-block">
+          <SortNews setOrderBy={setSortValue}/>
+
+          <DateFilter filterType={DateFilterType.DateFrom} setValue={setDateFrom} />
+          <DateFilter filterType={DateFilterType.DateTo} setValue={setDateTo} />
+        </div>
 
         <Button
           className={"search-button"}

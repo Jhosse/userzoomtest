@@ -39,7 +39,7 @@ export default ({
   };
 
   return (
-    <div className="sort-dropdown-container">
+    <div>
       <span>Sort by: </span>
       <ul className="sort-dropdown">
         <li>

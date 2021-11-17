@@ -1,14 +1,10 @@
-.sort-dropdown-container {
-  margin: 16px 0;
-}
-
 .sort-dropdown {
   width: 100%;
   border: 1px solid var(--grey);
   border-radius: 5px;
   list-style: none;
   padding: 0;
-  margin: 8px 0 0;
+  margin: 8px 0 16px;
 }
 
 .sort-dropdown-button:hover {
@@ -30,7 +26,7 @@
   align-items: center;
   justify-content: start;
   width: 100%;
-  margin: 6px 0;
+  margin: 7px 0;
 }
 
 .sort-dropdown-list-item {

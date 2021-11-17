@@ -11,12 +11,22 @@ const API_KEY = "efafeb6a-a729-4e69-af07-7e74896da5c1";
 
 const getNews = async ({
   searchKey,
-  orderBy = "newest",
+  orderBy,
+  dateFrom,
+  dateTo,
 }: GetNews ): Promise<GetNewsResponse> => {
 
-  const formatterOrderBy = orderBy.toLocaleLowerCase().trim();
+  let fetchUrl = `${URL}search?q=${searchKey}&api-key=${API_KEY}`;
 
-  return await fetch(`${URL}search?q=${searchKey}&api-key=${API_KEY}&order-by=${formatterOrderBy}`)
+  if (orderBy) {
+    const formatterOrderBy = orderBy.toLocaleLowerCase().trim();
+    fetchUrl += `&order-by=${formatterOrderBy}`;
+  }
+
+  if (dateFrom) fetchUrl += `&from-date=${dateFrom}`;
+  if (dateTo) fetchUrl += `&to-date=${dateTo}`;
+
+  return await fetch(fetchUrl)
   .then(async (response: Response) => {
     const data = await response.json();
 
