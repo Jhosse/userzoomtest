@@ -25,7 +25,6 @@ export default (): ReactElement => {
       setSearchResponse(resultsFromStore);
       return setSearchResultsViewState(SearchResultsViewState.Results);
     }
-
     if (searchResponse === undefined) {
       return setSearchResultsViewState(SearchResultsViewState.Empty);
     }

@@ -1,12 +1,20 @@
 .body-page-container {
   background-color: var(--white);
-  margin: 16px;
+  /** 
+    * - margin-bottom = footer + container margin.
+    * - (fix footer to bottom of the page when content isn't enough) 
+  */
+  margin: 16px 16px 96px 16px;
 }
 
 @media (min-width: 768px) {
   .body-page-container {
     width: 100%;
     max-width: 767px;
-    margin: 16px auto;
+    /** 
+      * - margin-bottom = footer + container margin.
+      * - (fix footer to bottom of the page when content isn't enough) 
+    */
+    margin: 16px auto 96px auto;
   }
 }

@@ -2,4 +2,5 @@ body {
   font-size: 16px;
   font-family: "Montserrat";
   color: var(--grey);
+  background-color: var(--wild-sand);
 }
