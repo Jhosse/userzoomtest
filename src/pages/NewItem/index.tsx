@@ -9,11 +9,13 @@ import { GetNew, GetNewResponse, GetNewResult, Asset } from "../../services/api/
 import PageContainer from "../../containers/PageContainer";
 import BodyPageContainer from "../../containers/BodyPageContainer";
 import Spinner from "../../components/Spinner";
+import Button, { ButtonVersion } from "../../components/Button";
 
 import "./style.css";
 
 export default (): ReactElement => {
-  const { search: pathnameSearch } = useHistory().location;
+  const history = useHistory();
+  const { search: pathnameSearch } = history.location;
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [singleNew, setSingleNew] = useState<GetNewResult>(undefined);
@@ -58,6 +60,8 @@ export default (): ReactElement => {
 
   const getContent = (): string => singleNew.blocks.body[0].bodyHtml;
 
+  const handleClick = () => history.goBack();
+
   useEffect(() => {
     const cleanId = pathnameSearch.split("?id=").pop();
     const payload: GetNew = {
@@ -75,7 +79,7 @@ export default (): ReactElement => {
     <PageContainer>
       <BodyPageContainer>
         {isLoading ? (
-          <Spinner />
+          <Spinner className="new-item-spinner" />
         ) : (
           <section>
             <figure className="m-zero">
@@ -86,7 +90,21 @@ export default (): ReactElement => {
             <div className="section-body">
               <h1 className="new-title">{singleNew.webTitle}</h1>
               <div className="new-content" dangerouslySetInnerHTML={{ __html: getContent() }} />
-              <a href={singleNew.webUrl} className="new-link" target="_blank">Read the full article.</a>
+              <footer className="new-item-footer">
+                <a
+                  href={singleNew.webUrl}
+                  className="new-link"
+                  target="_blank"
+                >
+                    Read the full article.
+                </a>
+                <Button
+                  className={""}
+                  content={"Back"}
+                  action={handleClick}
+                  version={ButtonVersion.Secondary}
+                />
+              </footer>
             </div>
           </section>
         )}

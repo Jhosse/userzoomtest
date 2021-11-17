@@ -84,6 +84,7 @@ export default ({
           onChange={handleInputChange}
         />
         <Button
+          className={"search-button"}
           content={"Search"}
           type="submit"
           action={() => {}}

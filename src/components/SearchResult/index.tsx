@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { GetNewsResult } from "../../services/api/types";
 import { RouteNames } from "../Routes";
+import { formatToDateString } from "../../utils/formatDate";
 
 import "./styles.css";
 
@@ -31,7 +32,7 @@ export default ({ item }: SearchResultProps): ReactElement => {
           <p className="new-date">
             Published:&nbsp;
             <span>
-              {item.webPublicationDate}
+              {formatToDateString(item.webPublicationDate)}
             </span>
           </p>
         </div>

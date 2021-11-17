@@ -11,10 +11,6 @@
   .body-page-container {
     width: 100%;
     max-width: 767px;
-    /** 
-      * - margin-bottom = footer + container margin.
-      * - (fix footer to bottom of the page when content isn't enough) 
-    */
     margin: 16px auto 96px auto;
   }
 }

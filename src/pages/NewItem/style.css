@@ -34,3 +34,29 @@ img,
   font-size: 14px;
   padding: 16px 0;
 }
+
+.new-item-spinner {
+  min-height: 500px;
+}
+
+.new-item-footer {
+  padding: 16px 0;
+}
+
+.new-item-footer > * {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .new-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .new-item-footer > * {
+    width: auto;
+  }
+}
